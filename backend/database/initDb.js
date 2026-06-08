@@ -8,3 +8,11 @@ CREATE TABLE IF NOT EXISTS users (
     password TEXT NOT NULL
 )
 `);
+
+db.run(`
+CREATE TABLE IF NOT EXISTS tables (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    table_number INTEGER NOT NULL,
+    seats INTEGER NOT NULL
+)
+`);

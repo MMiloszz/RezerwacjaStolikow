@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Stoliki</title>
+</head>
+<body>
+
+    <h1>Lista stolików</h1>
+
+    <form action="/tables/add" method="POST">
+        <div>
+            <label>Numer stolika:</label>
+            <input type="number" name="table_number" required>
+        </div>
+
+        <br>
+
+        <div>
+            <label>Liczba miejsc:</label>
+            <input type="number" name="seats" required>
+        </div>
+
+        <br>
+
+        <button type="submit">Dodaj stolik</button>
+    </form>
+
+    <hr>
+
+    <h2>Wszystkie stoliki</h2>
+
+    <% if (tables.length === 0) { %>
+        <p>Brak stolików.</p>
+    <% } %>
+
+   <% tables.forEach(table => { %>
+    <div>
+        Stolik nr <%= table.table_number %>
+        | Miejsca: <%= table.seats %>
+
+        <a href="/tables/delete/<%= table.id %>">
+            Usuń
+        </a>
+    </div>
+<% }); %>
+
+</body>
+</html>

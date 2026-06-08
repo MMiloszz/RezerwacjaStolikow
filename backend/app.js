@@ -4,6 +4,7 @@ const session = require("express-session");
 require("./database/initDb");
 
 const authRoutes = require("./routes/authRoutes");
+const tableRoutes = require("./routes/tableRoutes");
 
 const app = express();
 
@@ -31,6 +32,9 @@ app.get("/", (req, res) => {
 
 // Routing autoryzacji
 app.use("/", authRoutes);
+
+// Routing stolików
+app.use("/tables", tableRoutes);
 
 // Obsługa błędu 404
 app.use((req, res) => {
