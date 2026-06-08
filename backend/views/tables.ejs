@@ -6,19 +6,23 @@
 </head>
 <body>
 
+    <p>
+    <a href="/dashboard">← Powrót do panelu</a>
+    </p>
+
     <h1>Lista stolików</h1>
 
     <form action="/tables/add" method="POST">
         <div>
             <label>Numer stolika:</label>
-            <input type="number" name="table_number" required>
+            <input type="number" name="table_number" min="1" required>
         </div>
 
         <br>
 
         <div>
             <label>Liczba miejsc:</label>
-            <input type="number" name="seats" required>
+            <input type="number" name="seats" min="1" required>
         </div>
 
         <br>
@@ -36,11 +40,19 @@
 
    <% tables.forEach(table => { %>
     <div>
-        Stolik nr <%= table.table_number %>
-        | Miejsca: <%= table.seats %>
+        ID: <%= table.id %>
+| Stolik nr <%= table.table_number %>
+| Miejsca: <%= table.seats %>
+        <a href="/tables/edit/<%= table.id %>">
+            Edytuj
+            </a>
 
-        <a href="/tables/delete/<%= table.id %>">
-            Usuń
+        |
+        <a
+        href="/tables/delete/<%= table.id %>"
+        onclick="return confirm('Czy na pewno usunąć stolik?')"
+        >
+        Usuń
         </a>
     </div>
 <% }); %>

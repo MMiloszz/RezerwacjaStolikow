@@ -20,6 +20,30 @@ class Table {
             callback
         );
     }
+
+    static getById(id, callback) {
+    db.get(
+        'SELECT * FROM tables WHERE id = ?',
+        [id],
+        callback
+        );
+    }
+
+    static update(id, table_number, seats, callback) {
+    db.run(
+        'UPDATE tables SET table_number = ?, seats = ? WHERE id = ?',
+        [table_number, seats, id],
+        callback
+        );
+    }
+
+    static getByTableNumber(table_number, callback) {
+    db.get(
+        'SELECT * FROM tables WHERE table_number = ?',
+        [table_number],
+        callback
+    );
+}
 }
 
 module.exports = Table;

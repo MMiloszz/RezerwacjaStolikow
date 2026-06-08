@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Edycja stolika</title>
+</head>
+<body>
+
+    <h1>Edytuj stolik</h1>
+
+    <form action="/tables/update/<%= table.id %>" method="POST">
+
+        <div>
+            <label>Numer stolika:</label>
+            <input
+            type="number"
+            name="table_number"
+            value="<%= table.table_number %>"
+            min="1"
+            required
+        >
+        </div>
+
+        <br>
+
+        <div>
+            <label>Liczba miejsc:</label>
+            <input
+            type="number"
+            name="seats"
+            value="<%= table.seats %>"
+            min="1"
+            required
+        >
+        </div>
+
+        <br>
+
+        <button type="submit">
+            Zapisz zmiany
+        </button>
+
+    </form>
+
+    <br>
+
+    <a href="/tables">Powrót</a>
+
+</body>
+</html>
