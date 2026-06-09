@@ -5,6 +5,7 @@ require("./database/initDb");
 
 const authRoutes = require("./routes/authRoutes");
 const tableRoutes = require("./routes/tableRoutes");
+const reservationRoutes = require("./routes/reservationRoutes");
 
 const app = express();
 
@@ -35,6 +36,9 @@ app.use("/", authRoutes);
 
 // Routing stolików
 app.use("/tables", tableRoutes);
+
+// Routing rezerwacji
+app.use("/reservations", reservationRoutes);
 
 // Obsługa błędu 404
 app.use((req, res) => {

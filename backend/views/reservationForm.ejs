@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nowa rezerwacja</title>
+</head>
+<body>
+    <h1>Nowa rezerwacja</h1>
+
+    <form method="POST" action="/reservations/add">
+        <label for="table_id">Stolik:</label>
+        <select name="table_id" id="table_id" required>
+            <option value="">-- Wybierz stolik --</option>
+            <% tables.forEach(table => { %>
+                <option value="<%= table.id %>">Stolik <%= table.table_number %> (<%= table.seats %> osób)</option>
+            <% }); %>
+        </select>
+        <br><br>
+
+        <label for="reservation_date">Data rezerwacji:</label>
+        <input type="date" name="reservation_date" id="reservation_date" required>
+        <br><br>
+
+        <label for="start_time">Godzina od:</label>
+        <input type="time" name="start_time" id="start_time" required>
+        <br><br>
+
+        <label for="end_time">Godzina do:</label>
+        <input type="time" name="end_time" id="end_time" required>
+        <br><br>
+
+        <label for="guest_count">Liczba osób:</label>
+        <input type="number" name="guest_count" id="guest_count" min="1" required>
+        <br><br>
+
+        <button type="submit">Zarezerwuj</button>
+        <a href="/reservations">Anuluj</a>
+    </form>
+</body>
+</html>

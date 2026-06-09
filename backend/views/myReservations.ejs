@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Moje rezerwacje</title>
+</head>
+<body>
+    <h1>Moje rezerwacje</h1>
+
+    <a href="/reservations/add">Nowa rezerwacja</a>
+    <br><br>
+
+    <% if (reservations.length === 0) { %>
+        <p>Nie masz żadnych rezerwacji.</p>
+    <% } else { %>
+        <table border="1" cellpadding="10">
+            <thead>
+                <tr>
+                    <th>Stolik</th>
+                    <th>Data</th>
+                    <th>Od</th>
+                    <th>Do</th>
+                    <th>Osoby</th>
+                    <th>Status</th>
+                    <th>Akcje</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% reservations.forEach(reservation => { %>
+                    <tr>
+                        <td><%= reservation.table_number %></td>
+                        <td><%= reservation.reservation_date %></td>
+                        <td><%= reservation.start_time %></td>
+                        <td><%= reservation.end_time %></td>
+                        <td><%= reservation.guest_count %></td>
+                        <td><%= reservation.status %></td>
+                        <td>
+                            <% if (reservation.status === 'active') { %>
+                                <a href="/reservations/cancel/<%= reservation.id %>">Anuluj</a>
+                            <% } else { %>
+                                --
+                            <% } %>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    <% } %>
+
+    <br><a href="/tables">Powrót do stolików</a>
+</body>
+</html>

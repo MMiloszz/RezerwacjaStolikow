@@ -16,3 +16,18 @@ CREATE TABLE IF NOT EXISTS tables (
     seats INTEGER NOT NULL
 )
 `);
+
+db.run(`
+CREATE TABLE IF NOT EXISTS reservations (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    table_id INTEGER NOT NULL,
+    reservation_date DATE NOT NULL,
+    start_time TIME NOT NULL,
+    end_time TIME NOT NULL,
+    guest_count INTEGER NOT NULL,
+    status TEXT DEFAULT 'active',
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (table_id) REFERENCES tables(id)
+)
+`);
