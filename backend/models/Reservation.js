@@ -48,6 +48,18 @@ class Reservation {
             callback
         );
     }
+
+    static checkUserConflict(user_id, reservation_date, start_time, end_time, callback) {
+        db.get(
+            `SELECT * FROM reservations 
+             WHERE user_id = ? 
+             AND reservation_date = ? 
+             AND status = 'active'
+             AND ((start_time < ? AND end_time > ?) OR (start_time < ? AND end_time > ?) OR (start_time >= ? AND end_time <= ?))`,
+            [user_id, reservation_date, end_time, start_time, end_time, start_time, start_time, end_time],
+            callback
+        );
+    }
 }
 
 module.exports = Reservation;

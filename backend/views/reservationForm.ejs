@@ -11,13 +11,13 @@
         <select name="table_id" id="table_id" required>
             <option value="">-- Wybierz stolik --</option>
             <% tables.forEach(table => { %>
-                <option value="<%= table.id %>">Stolik <%= table.table_number %> (<%= table.seats %> osób)</option>
+                <option value="<%= table.id %>" data-seats="<%= table.seats %>">Stolik <%= table.table_number %> (<%= table.seats %> osób)</option>
             <% }); %>
         </select>
         <br><br>
 
         <label for="reservation_date">Data rezerwacji:</label>
-        <input type="date" name="reservation_date" id="reservation_date" required>
+        <input type="date" name="reservation_date" id="reservation_date" min="<%= minDate %>" required>
         <br><br>
 
         <label for="start_time">Godzina od:</label>
@@ -35,5 +35,24 @@
         <button type="submit">Zarezerwuj</button>
         <a href="/reservations">Anuluj</a>
     </form>
+
+    <script>
+        const tableSelect = document.getElementById('table_id');
+        const guestCountInput = document.getElementById('guest_count');
+
+        function updateGuestLimit() {
+            const selectedOption = tableSelect.options[tableSelect.selectedIndex];
+            const seats = selectedOption ? selectedOption.dataset.seats : '';
+
+            guestCountInput.max = seats || '';
+
+            if (seats && Number(guestCountInput.value) > Number(seats)) {
+                guestCountInput.value = seats;
+            }
+        }
+
+        tableSelect.addEventListener('change', updateGuestLimit);
+        updateGuestLimit();
+    </script>
 </body>
 </html>
