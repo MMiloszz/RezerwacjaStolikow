@@ -1,51 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="pl">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rejestracja</title>
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-
-<h1>Rejestracja</h1>
-
-<form action="/register" method="POST">
-
-    <input
-        type="text"
-        name="username"
-        placeholder="Nazwa użytkownika"
-        required
-    >
-
-    <br><br>
-
-    <input
-        type="email"
-        name="email"
-        placeholder="Email"
-        required
-    >
-
-    <br><br>
-
-    <input
-        type="password"
-        name="password"
-        placeholder="Hasło"
-        required
-    >
-
-    <br><br>
-
-    <button type="submit">
-        Zarejestruj
-    </button>
-
-</form>
-
-<p>
-    Masz już konto?
-    <a href="/login">Logowanie</a>
-</p>
-
+    <div class="page-layout">
+        <header class="page-header">
+            <a class="brand" href="/">Rezerwacja Stolika</a>
+            <ul class="nav-list">
+                <li class="nav-item"><a href="/login">Logowanie</a></li>
+            </ul>
+        </header>
+        <main class="content">
+            <div class="container">
+                <section class="hero">
+                    <div class="hero-info">
+                        <h1>Rejestracja do systemu</h1>
+                        <p class="small-note">Stwórz konto i rozpocznij obsługę rezerwacji — wszystko w jednym panelu.</p>
+                    </div>
+                    <div class="hero-card">
+                        <h2>Załóż konto</h2>
+                        <form action="/register" method="POST" class="form-grid">
+                            <% if (error) { %>
+                                <div class="alert alert-error"><%= error %></div>
+                            <% } %>
+                            <label>
+                                Nazwa użytkownika
+                                <input type="text" name="username" placeholder="Nazwa użytkownika" required>
+                            </label>
+                            <label>
+                                Email
+                                <input type="email" name="email" placeholder="Twój email" required>
+                            </label>
+                            <label>
+                                Hasło
+                                <input type="password" name="password" placeholder="Hasło" required>
+                            </label>
+                            <button class="button primary" type="submit">Zarejestruj</button>
+                        </form>
+                        <p class="small-note">Masz już konto? <a href="/login">Zaloguj się</a></p>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
 </body>
 </html>

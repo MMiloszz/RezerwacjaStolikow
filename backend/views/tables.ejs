@@ -1,62 +1,72 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stoliki</title>
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
+    <div class="page-layout">
+        <header class="page-header">
+            <a class="brand" href="/dashboard">Rezerwacja Stolika</a>
+            <ul class="nav-list">
+                <li class="nav-item"><a href="/dashboard">Panel</a></li>
+                <li class="nav-item"><a href="/reservations">Rezerwacje</a></li>
+            </ul>
+        </header>
+        <main class="content">
+            <div class="container">
+                <div class="hero-card">
+                    <div class="section-title">
+                        <div>
+                            <h1>Stoliki</h1>
+                            <p class="small-note">Dodaj i edytuj stoliki, aby łatwo zarządzać obsługą restauracji.</p>
+                        </div>
+                        <a class="button secondary" href="/dashboard">Powrót do panelu</a>
+                    </div>
 
-    <p>
-    <a href="/dashboard">← Powrót do panelu</a> | 
-    <a href="/reservations">Moje rezerwacje</a>
-    </p>
+                    <form action="/tables/add" method="POST" class="form-grid form-row-2">
+                        <label>
+                            Numer stolika
+                            <input type="number" name="table_number" min="1" required>
+                        </label>
+                        <label>
+                            Liczba miejsc
+                            <input type="number" name="seats" min="1" required>
+                        </label>
+                        <button class="button primary" type="submit">Dodaj stolik</button>
+                    </form>
+                </div>
 
-    <h1>Lista stolików</h1>
+                <div class="card">
+                    <div class="section-title">
+                        <div>
+                            <h2>Lista stolików</h2>
+                            <p class="small-note">Przejrzyj wszystkie stoliki i wykonaj edycję lub usunięcie.</p>
+                        </div>
+                    </div>
 
-    <form action="/tables/add" method="POST">
-        <div>
-            <label>Numer stolika:</label>
-            <input type="number" name="table_number" min="1" required>
-        </div>
-
-        <br>
-
-        <div>
-            <label>Liczba miejsc:</label>
-            <input type="number" name="seats" min="1" required>
-        </div>
-
-        <br>
-
-        <button type="submit">Dodaj stolik</button>
-    </form>
-
-    <hr>
-
-    <h2>Wszystkie stoliki</h2>
-
-    <% if (tables.length === 0) { %>
-        <p>Brak stolików.</p>
-    <% } %>
-
-   <% tables.forEach(table => { %>
-    <div>
-        ID: <%= table.id %>
-| Stolik nr <%= table.table_number %>
-| Miejsca: <%= table.seats %>
-        <a href="/tables/edit/<%= table.id %>">
-            Edytuj
-            </a>
-
-        |
-        <a
-        href="/tables/delete/<%= table.id %>"
-        onclick="return confirm('Czy na pewno usunąć stolik?')"
-        >
-        Usuń
-        </a>
+                    <% if (tables.length === 0) { %>
+                        <p class="small-note">Brak dostępnych stolików. Dodaj pierwszy stolik, aby rozpocząć.</p>
+                    <% } else { %>
+                        <div class="tables-grid">
+                            <% tables.forEach(table => { %>
+                                <div class="table-card">
+                                    <strong>Stolik nr <%= table.table_number %></strong>
+                                    <p>Miejsca: <%= table.seats %></p>
+                                    <div class="table-actions">
+                                        <a class="button ghost" href="/tables/edit/<%= table.id %>">Edytuj</a>
+                                        <a class="button secondary" href="/tables/delete/<%= table.id %>" onclick="return confirm('Czy na pewno usunąć stolik?')">Usuń</a>
+                                    </div>
+                                </div>
+                            <% }) %>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+        </main>
     </div>
-<% }); %>
-
 </body>
 </html>

@@ -1,40 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="pl">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logowanie</title>
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-
-<h1>Logowanie</h1>
-
-<form action="/login" method="POST">
-    <input
-        type="email"
-        name="email"
-        placeholder="Email"
-        required
-    >
-
-    <br><br>
-
-    <input
-        type="password"
-        name="password"
-        placeholder="Hasło"
-        required
-    >
-
-    <br><br>
-
-    <button type="submit">
-        Zaloguj
-    </button>
-</form>
-
-<p>
-    Nie masz konta?
-    <a href="/register">Rejestracja</a>
-</p>
-
+    <div class="page-layout">
+        <header class="page-header">
+            <a class="brand" href="/">Rezerwacja Stolika</a>
+            <ul class="nav-list">
+                <li class="nav-item"><a href="/register">Rejestracja</a></li>
+            </ul>
+        </header>
+        <main class="content">
+            <div class="container">
+                <section class="hero">
+                    <div class="hero-info">
+                        <h1>Logowanie do panelu rezerwacji</h1>
+                        <p class="small-note">Zarządzaj stolikami, przeglądaj rezerwacje i planuj obsługę restauracji w prostym panelu.</p>
+                    </div>
+                    <div class="hero-card">
+                        <h2>Wpisz dane</h2>
+                        <form action="/login" method="POST" class="form-grid">
+                            <% if (error) { %>
+                                <div class="alert alert-error"><%= error %></div>
+                            <% } %>
+                            <label>
+                                Email
+                                <input type="email" name="email" placeholder="Twój email" required>
+                            </label>
+                            <label>
+                                Hasło
+                                <input type="password" name="password" placeholder="Twoje hasło" required>
+                            </label>
+                            <button class="button primary" type="submit">Zaloguj</button>
+                        </form>
+                        <p class="small-note">Nie masz konta? <a href="/register">Zarejestruj się</a></p>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
 </body>
 </html>

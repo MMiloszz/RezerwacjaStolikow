@@ -1,23 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="pl">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel użytkownika</title>
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-
-<h1>Witaj, <%= user.username %>!</h1>
-
-<p>Jesteś zalogowany jako: <%= user.email %></p>
-
-<p>
-    <a href="/reservations">Moje rezerwacje</a>
-</p>
-
-<p>
-    <a href="/tables">Zarządzaj stolikami</a>
-</p>
-
-<a href="/logout">Wyloguj</a>
-
+    <div class="page-layout">
+        <header class="page-header">
+            <a class="brand" href="/dashboard">Rezerwacja Stolika</a>
+            <ul class="nav-list">
+                <li class="nav-item"><a href="/reservations">Rezerwacje</a></li>
+                <li class="nav-item"><a href="/tables">Stoliki</a></li>
+                <li class="nav-item"><a class="button secondary" href="/logout">Wyloguj</a></li>
+            </ul>
+        </header>
+        <main class="content">
+            <div class="container">
+                <section class="hero">
+                    <div class="hero-info">
+                        <h1>Witaj, <%= user.username %>!</h1>
+                        <p class="small-note">Sprawdź swoje rezerwacje i zarządzaj stolikami z nowoczesnego panelu.</p>
+                    </div>
+                    <div class="hero-card">
+                        <div class="card-grid card-grid-2">
+                            <div class="stat-card">
+                                <strong>Rezerwacje</strong>
+                                <p>Przejrzyj aktywne rezerwacje i anuluj je w razie potrzeby.</p>
+                                <a class="button primary" href="/reservations">Przejdź</a>
+                            </div>
+                            <div class="stat-card">
+                                <strong>Stoliki</strong>
+                                <p>Dodawaj, edytuj lub usuwaj stoliki dostępne w systemie.</p>
+                                <a class="button secondary" href="/tables">Zarządzaj</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
 </body>
 </html>

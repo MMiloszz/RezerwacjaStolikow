@@ -1,51 +1,70 @@
 <!DOCTYPE html>
-<html>
+<html lang="pl">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moje rezerwacje</title>
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <h1>Moje rezerwacje</h1>
+    <div class="page-layout">
+        <header class="page-header">
+            <a class="brand" href="/dashboard">Rezerwacja Stolika</a>
+            <ul class="nav-list">
+                <li class="nav-item"><a href="/dashboard">Panel</a></li>
+                <li class="nav-item"><a href="/tables">Stoliki</a></li>
+                <li class="nav-item"><a class="button secondary" href="/reservations/add">Nowa rezerwacja</a></li>
+            </ul>
+        </header>
+        <main class="content">
+            <div class="container">
+                <div class="hero-card">
+                    <div class="section-title">
+                        <div>
+                            <h1>Moje rezerwacje</h1>
+                            <p class="small-note">Przeglądaj aktualne rezerwacje i anuluj te, które nie są już potrzebne.</p>
+                        </div>
+                    </div>
 
-    <a href="/reservations/add">Nowa rezerwacja</a>
-    <br><br>
-
-    <% if (reservations.length === 0) { %>
-        <p>Nie masz żadnych rezerwacji.</p>
-    <% } else { %>
-        <table border="1" cellpadding="10">
-            <thead>
-                <tr>
-                    <th>Stolik</th>
-                    <th>Data</th>
-                    <th>Od</th>
-                    <th>Do</th>
-                    <th>Osoby</th>
-                    <th>Status</th>
-                    <th>Akcje</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% reservations.forEach(reservation => { %>
-                    <tr>
-                        <td><%= reservation.table_number %></td>
-                        <td><%= reservation.reservation_date %></td>
-                        <td><%= reservation.start_time %></td>
-                        <td><%= reservation.end_time %></td>
-                        <td><%= reservation.guest_count %></td>
-                        <td><%= reservation.status %></td>
-                        <td>
-                            <% if (reservation.status === 'active') { %>
-                                <a href="/reservations/cancel/<%= reservation.id %>">Anuluj</a>
-                            <% } else { %>
-                                --
-                            <% } %>
-                        </td>
-                    </tr>
-                <% }); %>
-            </tbody>
-        </table>
-    <% } %>
-
-    <br><a href="/tables">Powrót do stolików</a>
+                    <% if (reservations.length === 0) { %>
+                        <p class="small-note">Brak aktywnych rezerwacji. Dodaj nową rezerwację, aby rozpocząć.</p>
+                    <% } else { %>
+                        <table class="table-overview">
+                            <thead>
+                                <tr>
+                                    <th>Stolik</th>
+                                    <th>Data</th>
+                                    <th>Od</th>
+                                    <th>Do</th>
+                                    <th>Osoby</th>
+                                    <th>Status</th>
+                                    <th>Akcje</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% reservations.forEach(reservation => { %>
+                                    <tr>
+                                        <td><%= reservation.table_number %></td>
+                                        <td><%= reservation.reservation_date %></td>
+                                        <td><%= reservation.start_time %></td>
+                                        <td><%= reservation.end_time %></td>
+                                        <td><%= reservation.guest_count %></td>
+                                        <td><%= reservation.status %></td>
+                                        <td class="table-actions">
+                                            <% if (reservation.status === 'active') { %>
+                                                <a class="button secondary" href="/reservations/cancel/<%= reservation.id %>">Anuluj</a>
+                                            <% } else { %>
+                                                --
+                                            <% } %>
+                                        </td>
+                                    </tr>
+                                <% }); %>
+                            </tbody>
+                        </table>
+                    <% } %>
+                </div>
+            </div>
+        </main>
+    </div>
 </body>
 </html>

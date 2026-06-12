@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const session = require("express-session");
 
 require("./database/initDb");
@@ -12,6 +13,7 @@ const app = express();
 // Obsługa danych z formularzy
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "public")));
 
 // Ustawienie EJS jako silnika widoków
 app.set("view engine", "ejs");

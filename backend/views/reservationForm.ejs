@@ -1,40 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html lang="pl">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nowa rezerwacja</title>
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <h1>Nowa rezerwacja</h1>
+    <div class="page-layout">
+        <header class="page-header">
+            <a class="brand" href="/dashboard">Rezerwacja Stolika</a>
+            <ul class="nav-list">
+                <li class="nav-item"><a href="/dashboard">Panel</a></li>
+                <li class="nav-item"><a href="/tables">Stoliki</a></li>
+                <li class="nav-item"><a class="button secondary" href="/reservations">Powrót</a></li>
+            </ul>
+        </header>
+        <main class="content">
+            <div class="container">
+                <div class="hero-card">
+                    <div class="section-title">
+                        <div>
+                            <h1>Nowa rezerwacja</h1>
+                            <p class="small-note">Wybierz stolik, datę i godzinę, aby zaplanować obsługę.</p>
+                        </div>
+                    </div>
 
-    <form method="POST" action="/reservations/add">
-        <label for="table_id">Stolik:</label>
-        <select name="table_id" id="table_id" required>
-            <option value="">-- Wybierz stolik --</option>
-            <% tables.forEach(table => { %>
-                <option value="<%= table.id %>" data-seats="<%= table.seats %>">Stolik <%= table.table_number %> (<%= table.seats %> osób)</option>
-            <% }); %>
-        </select>
-        <br><br>
-
-        <label for="reservation_date">Data rezerwacji:</label>
-        <input type="date" name="reservation_date" id="reservation_date" min="<%= minDate %>" required>
-        <br><br>
-
-        <label for="start_time">Godzina od:</label>
-        <input type="time" name="start_time" id="start_time" required>
-        <br><br>
-
-        <label for="end_time">Godzina do:</label>
-        <input type="time" name="end_time" id="end_time" required>
-        <br><br>
-
-        <label for="guest_count">Liczba osób:</label>
-        <input type="number" name="guest_count" id="guest_count" min="1" required>
-        <br><br>
-
-        <button type="submit">Zarezerwuj</button>
-        <a href="/reservations">Anuluj</a>
-    </form>
+                    <form method="POST" action="/reservations/add" class="form-grid form-row-2">
+                        <label>
+                            Stolik
+                            <select name="table_id" id="table_id" required>
+                                <option value="">-- Wybierz stolik --</option>
+                                <% tables.forEach(table => { %>
+                                    <option value="<%= table.id %>" data-seats="<%= table.seats %>">Stolik <%= table.table_number %> (<%= table.seats %> osób)</option>
+                                <% }); %>
+                            </select>
+                        </label>
+                        <label>
+                            Data rezerwacji
+                            <input type="date" name="reservation_date" id="reservation_date" min="<%= minDate %>" required>
+                        </label>
+                        <label>
+                            Godzina od
+                            <input type="time" name="start_time" id="start_time" required>
+                        </label>
+                        <label>
+                            Godzina do
+                            <input type="time" name="end_time" id="end_time" required>
+                        </label>
+                        <label>
+                            Liczba osób
+                            <input type="number" name="guest_count" id="guest_count" min="1" required>
+                        </label>
+                        <div class="card-actions">
+                            <button class="button primary" type="submit">Zarezerwuj</button>
+                            <a class="button ghost" href="/reservations">Anuluj</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
 
     <script>
         const tableSelect = document.getElementById('table_id');
@@ -43,9 +69,7 @@
         function updateGuestLimit() {
             const selectedOption = tableSelect.options[tableSelect.selectedIndex];
             const seats = selectedOption ? selectedOption.dataset.seats : '';
-
             guestCountInput.max = seats || '';
-
             if (seats && Number(guestCountInput.value) > Number(seats)) {
                 guestCountInput.value = seats;
             }
